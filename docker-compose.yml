@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    container_name: app
+    image: prabukannan/transactica
+    ports:
+      - 65000:8000
+    networks:
+      - backend
+    depends_on:
+      - mysql
+  mysql:
+    container_name: mysql_app
+    image: mysql
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=securerootpassword
+      - MYSQL_DATABASE=transactica
+      - MYSQL_USER=prabu
+      - MYSQL_PASSWORD=9001487
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
+
